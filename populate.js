@@ -36,6 +36,7 @@ $(window).load(function() {
     $("#column-3").hide();
     $("#default-3").hide(); // no reason for this to ever be seen again
     $(".subCat").hide(); // blanket hide
+    $("#column-3").contents().find("li.selected").removeClass("selected"); // likewise
     $(".cat_"+this.id[4]).show(); //specific reveal
     $("#column-3").show();
     $(".output").children("div").hide(); // blanket hide
