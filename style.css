@@ -1,58 +1,58 @@
 /* Copyright 2015 Mozart Olbrycht-Palmer; no rights reserved */
- 
+
 body {
   font-family: sans-serif;
   font-weight: lighter;
   background-color: #0073AE;
   height: 100%;
 }
- 
+
 .output div {
     display: none;
 }
- 
+
 p {
   line-height:150%;
 }
- 
+
 h1 , h2 {
   font-weight: lighter;
 }
- 
+
 h2 {
   color: #0073AE;
 }
- 
+
 h3 {
   margin-left: 2.5%;
 }
- 
+
 h4 {
   margin-left: 5%;
 }
- 
+
 .column-list {
   list-style: none
 }
- 
+
 .field {
   width: 90%;
   display:none;
 }
- 
+
 .label {
   width: 90%;
 }
- 
+
 a {
   color: #0073AE;
   text-decoration:none;
 }
- 
+
 a:hover{
   color: #008bc0
 }
- 
+
 .column-list li {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
@@ -67,44 +67,45 @@ a:hover{
   -ms-user-select: none;
   user-select: none;
 }
- 
+
 .column-list li:hover {
   color: white;
   background-color: #4da8d4;
   cursor: pointer;
 }
- 
+
 #columns {
   width: 100%;
+  top: 10%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3em;
+  margin-top: auto; // was 3em;
   border: black solid thin;
-  border-radius: 10px;
+  border-radius: 5px;
 }
- 
+
 #columns td {
   width: 25%;
 }
-   
+
 .column {
     margin-top:0.5em;
     margin-bottom: 0.5em;
     width: 100%;
-    height: 14em;
+    height: 100%; //was 14em
     border: none;
 }
- 
+
 .selected {
    background: #0073AE;
    color: white;
 }
- 
+
 .selected:hover {
    background: #0073AE;
    color: white;
 }
- 
+
 .placeholder {
     color: grey;
     font-size: large;
@@ -116,7 +117,7 @@ a:hover{
     user-select: none;
     cursor: default;
 }
- 
+
 .container {
   margin-left:auto;
   margin-right:auto;
@@ -124,13 +125,14 @@ a:hover{
   background-color: white;
   padding: 5%;
   height: 100%;
+  border-radius: 5px;
 }
- 
+
 .select {
   display: none;
   width: 90%;
 }
- 
+
 .logo,
 .logo:hover {
   float: left;
@@ -149,7 +151,7 @@ a:hover{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
- 
+
 .logo-bold-blue {
   font-weight: bold;
   color: #0073ae;
@@ -157,14 +159,14 @@ a:hover{
   overflow: hidden;
   text-overflow: ellipsis;
 }
- 
+
 .logo-australia {
   font-size: .65em;
   color: #333;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
- 
+
 @font-face {
     font-family: 'GehenSans';
     src: url('gehensans-regular-webfont.eot');
@@ -174,9 +176,9 @@ a:hover{
          url('gehensans-regular-webfont.svg#GehenSans-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
- 
+
 }
- 
+
 @font-face {
     font-family: 'GehenSans';
     src: url('gehensans-bold-webfont.eot');
@@ -186,5 +188,5 @@ a:hover{
          url('gehensans-bold-webfont.svg#GehenSans-Bold') format('svg');
     font-weight: bold;
     font-style: normal;
- 
+
 }

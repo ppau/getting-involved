@@ -6,6 +6,8 @@ $(window).load(function() {
   // its `title` attribute becomes part of the LH column
   // its children with a `subcategory` class become part of the RH column
 
+  var columnsHeight;
+
   var subCatsUL = '<ul class="column-list">';
   var catsUL = '<ul class="column-list">';
 
@@ -25,6 +27,8 @@ $(window).load(function() {
   $('#column-1').html(catsUL);
   $('#column-3').html(subCatsUL);
 
+
+
   // Categories click handler
   $(".cat").click(function() {
     $("#column-1").contents().find("li.selected").removeClass("selected");
@@ -39,10 +43,20 @@ $(window).load(function() {
 
   // Sub-Categories click handler
   $(".subCat").click(function(){
+    var it = this.innerText.toString(); // hopefully that's a deep copy
     $("#column-3").contents().find("li.selected").removeClass("selected");
     $(this).toggleClass("selected");
     $(".output").children("div").hide(); // blanket hide
-    $("div[title='"+this.innerText+"']").show(); // specific reveal
+
+    // We need to use this inefficient approach rather than JQ sels because
+    // title tags could contain all sorts of mess which we can't have
+    // in a [attr=val] selector string.
+    $(".output").children("div").each(function(idx, item){
+      if(item.title == it){
+        $(item).show();
+      }
+    });
+
   });
 
 });
