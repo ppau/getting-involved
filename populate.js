@@ -7,18 +7,21 @@ $(window).load(function() {
   // its children with a `subcategory` class become part of the RH column
 
   var columnsHeight;
+  var maxSubCats = 0;
 
   var subCatsUL = '<ul class="column-list">';
   var catsUL = '<ul class="column-list">';
 
   // Categories...
   $(".category").each(function(idx, category) {
-    catsUL += '<li class="cat" id="cat_'+idx+'">'+category.title+'</li>';
+    catsUL += '<li class="cat" id="cat_'+idx+'">'+category.getAttribute("data-title")+'</li>';
 
     // ... and sub-categories!
     for(var i=0; i<category.children.length; i++){
-      subCatsUL += '<li class="subCat cat_'+idx+'">'+category.children[i].title+'</li>';
+      subCatsUL += '<li class="subCat cat_'+idx+'">'+category.children[i].getAttribute("data-title")+'</li>';
     }
+
+    maxSubCats = Math.max(maxSubCats, category.children.length);
   });
 
   subCatsUL += '</ul>';
@@ -27,7 +30,14 @@ $(window).load(function() {
   $('#column-1').html(catsUL);
   $('#column-3').html(subCatsUL);
 
+  // make the columns table be an appropriate height
 
+  /*
+  columnsHeight = Math.max($(".category").length, maxSubCats) * 1.7;
+  console.log("columnsHeight:", columnsHeight)
+
+  $(".column").css('height', columnsHeight.toString()+'em');
+  */
 
   // Categories click handler
   $(".cat").click(function() {
@@ -53,7 +63,7 @@ $(window).load(function() {
     // title tags could contain all sorts of mess which we can't have
     // in a [attr=val] selector string.
     $(".output").children("div").each(function(idx, item){
-      if(item.title == it){
+      if(item.getAttribute("data-title") == it){
         $(item).show();
       }
     });
