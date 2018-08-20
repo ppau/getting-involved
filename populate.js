@@ -2,9 +2,9 @@
 // Adapted from `kolumnoj.js` by Mozart Olbrycht-Palmer, 2015
 
 $(window).load(function() {
-  // find every element with a `category` class
-  // its `title` attribute becomes part of the LH column
-  // its children with a `subcategory` class become part of the RH column
+  // We're essentially constructing a two-level Table of Contents
+  // from an *implicit* tree structure
+  // The `h2`s are the roots, the `h3`s the leaves
 
   var columnsHeight;
   var maxSubCats = 0;
@@ -13,15 +13,16 @@ $(window).load(function() {
   var catsUL = '<ul class="column-list">';
 
   // Categories...
-  $(".category").each(function(idx, category) {
-    catsUL += '<li class="cat" id="cat_'+idx+'">'+category.getAttribute("data-title")+'</li>';
+  $("h2").each(function(idx, category) {
+    catsUL += '<li class="cat" id="cat_'+idx+'">'+category.innerText+'</li>';
+    // h2:stop, h3:filter
+    var subcats = 0;
+    $(category).nextUntil("h2", "h3").each(function(jdx, subcategory){
+      subCatsUL += '<li class="subCat cat_'+idx+'">'+subcategory.innerText+'</li>';
+      subcats++;
+    });
 
-    // ... and sub-categories!
-    for(var i=0; i<category.children.length; i++){
-      subCatsUL += '<li class="subCat cat_'+idx+'">'+category.children[i].getAttribute("data-title")+'</li>';
-    }
-
-    maxSubCats = Math.max(maxSubCats, category.children.length);
+    maxSubCats = Math.max(maxSubCats, subcats);
   });
 
   subCatsUL += '</ul>';
@@ -49,24 +50,33 @@ $(window).load(function() {
     $("#column-3").contents().find("li.selected").removeClass("selected"); // likewise
     $(".cat_"+this.id[4]).show(); //specific reveal
     $("#column-3").show();
-    $(".output").children("div").hide(); // blanket hide
+    $("#content").children().hide(); // blanket hide
   });
 
   // Sub-Categories click handler
   $(".subCat").click(function(){
-    var it = this.innerText.toString(); // hopefully that's a deep copy
     $("#column-3").contents().find("li.selected").removeClass("selected");
     $(this).toggleClass("selected");
-    $(".output").children("div").hide(); // blanket hide
+    $("#content").children().hide(); // blanket hide
 
-    // We need to use this inefficient approach rather than JQ sels because
-    // title tags could contain all sorts of mess which we can't have
-    // in a [attr=val] selector string.
-    $(".output").children("div").each(function(idx, item){
-      if(item.getAttribute("data-title") == it){
-        $(item).show();
+    // show full nav if possible
+    $("#columns")[0].scrollIntoView();
+
+    // show subcat
+    this.scrollIntoView();
+
+    // Now we have to figure out what to show
+    // Since we seem to dislike putting id tags on things, we need to search
+    var it = this.innerText.toString(); // hopefully that's a deep copy
+    $("#content").children("h3").each(function(idx, subcat){
+      if(subcat.innerText == it){
+        $(subcat).nextUntil("h1, h2, h3").show();
+
+        // Show the subtitle always
+        $(subcat).next("h4")[0].scrollIntoView();
       }
     });
+
 
   });
 

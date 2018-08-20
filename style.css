@@ -1,33 +1,47 @@
 /* Copyright 2015 Mozart Olbrycht-Palmer; no rights reserved */
+/* Updated 2018 Alex Jago */
 
 body {
-  font-family: sans-serif;
-  font-weight: lighter;
+  font-family: "Open Sans", sans-serif;
   background-color: #0073AE;
   height: 100%;
+  font-size: 12pt;
 }
 
-.output div {
+#content > h2, h3 {
     display: none;
 }
+
+
+#content>* {
+  display: none;
+}
+
 
 p {
   line-height:150%;
 }
 
-h1 , h2 {
+h1, h2, h3, h4, h5, h6 {
+  color: #0073AE;
+  font-family: "GehenSans", "Gehen Sans", "Open Sans", sans-serif;
+}
+
+h1, h2, h3 {
   font-weight: lighter;
 }
 
-h2 {
-  color: #0073AE;
+/*
+h4 {
+  font-style: italic;
 }
+*/
 
-h3 {
+h5 {
   margin-left: 2.5%;
 }
 
-h4 {
+h6 {
   margin-left: 5%;
 }
 
